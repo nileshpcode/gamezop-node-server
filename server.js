@@ -30,6 +30,13 @@ app.use(express.json());
 app.post('/api/data', (req, res) => {
     const currentTimestamp = (!Date.now ? +new Date() : Date.now());
 
+    const bodyParser = req.body;
+
+    if(bodyParser["name"] == undefined || bodyParser["name"] == ""){
+        res.status(400)
+        res.send({message:"Bad body"})
+    }
+
     var dataStr = JSON.stringify(req.body)
 
     var dataKey = 'gamezop_+' + currentTimestamp
